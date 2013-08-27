@@ -1,0 +1,59 @@
+<!-- 
+ * A short example consisting
+ * Three neurons
+ * two "sensors"
+ * one "actor"
+ * October 27 2013
+ * fmi2012[at]web.de
+ -->
+<brain>
+	<sensor id="eye">
+		<threshhold value="30" />
+		<getValueFrom name="optical" />
+	</sensor>
+	
+	<sensor id="finger">
+		<threshhold value="30" />
+		<getValueFrom name="sensorial" />
+	</sensor>
+
+	<neuron id="one">
+		<synapse-from>
+			<id>eye</id>
+		</synapse-from>
+		<treshhold value="50" />
+		<synapse target="two"   strength="70" />
+		<synapse target="three" strenght="20" />
+	</neuron>
+
+	<neuron id="two">
+		<synapse-from>
+			<id>one</id>
+			<id>three</id>
+		</synapse-from>
+		<threshhold value="80" />
+		<synapse target="OutA"  strength="20" />
+		<synapse target="three" strength="40" />
+	</neuron>
+	
+	<neuron id="two">
+		<synapse-from>
+			<id>one</id>
+			<id>two</id>
+			<id>finger</id>
+		</synapse-from>
+		<threshhold value="80" />
+		<synapse target="OutA"  strength="10" />
+		<synapse target="two"   strength="60" />
+	</neuron>	
+
+	<actor id="outA">
+		<synapse-from>
+			<id>two</id>
+			<id>three</id>
+		</synapse-from>
+		<threshhold value="50" />
+		<act-on name="muscle" />
+	<actor>
+
+</brain>
